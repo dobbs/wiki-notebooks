@@ -1,0 +1,67 @@
+<!doctype html>
+<notebook>
+  <title>Explore Renaming</title>
+  <script type="text/markdown">
+    # Explore Renaming
+  </script>
+  <script type="module">
+   const form = view(Inputs.form({
+     site: Inputs.text({label: 'Site', value: 'wiki.dbbs.co'}),
+     protocol: Inputs.radio(['http', 'https'], {label: 'Protocol', value: 'http'}),
+   }));
+  </script>
+  <script type="module">
+   const sitemapUrl = new URL(`http://${form.site}/system/sitemap.json`);
+  </script>
+  <script type="module">
+   const sitemap = fetch(sitemapUrl)
+     .then(res => res.json())
+     .then(json => json.map(r => (r.date = new Date(r.date), r)))
+     .catch(error => [{error}]);
+   const results = view(Inputs.search(await sitemap, {
+     query: 'Welcome'
+   }));
+  </script>
+  <script type="module">
+    const selection = view(Inputs.table(results, {
+      columns: ['title', 'date'],
+      value: results.reduce((max, item) => (item.date > max.date) ? item : max,
+                            {date: new Date(0)}),
+      header: {title: 'pages in sitemap'},
+      sort: 'date',
+      reverse: true,
+      multiple: false,
+      rows: 5.5
+    }));
+  </script>
+  <script type="module">
+   const slug = (await selection)?.slug;
+   const pageUrl = new URL(`/${slug}.json`, sitemapUrl);
+   const page = fetch(pageUrl)
+     .then(res => res.json())
+     .catch(error => {error});
+  </script>
+  <script type="module">
+   await selection;
+   const backlinks = sitemap.reduce((acc, pageInfo) => {
+     if (pageInfo.links && !!(pageInfo.links[selection?.slug])) {
+       acc.add(pageInfo)
+     }
+     return acc;
+   }, new Set());
+  </script>
+  <script type="module">
+   view(Inputs.table(backlinks, {
+     columns: ['title', 'date'],
+     header: {title: 'backlinks'},
+     sort: 'date',
+     reverse: true,
+     rows: 5.5
+   }));
+  </script>
+  <script type="module" pinned>
+   const debug = {selection, page, backlinks};
+   display(debug);
+  </script>
+
+</notebook>
