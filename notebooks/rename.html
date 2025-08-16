@@ -1,6 +1,21 @@
 <!doctype html>
 <notebook>
   <title>Explore Renaming</title>
+  <script type="module">
+   const frameInfo = Object.fromEntries(new URLSearchParams(window.location.hash.slice(1)).entries());
+   const [frameProtocol, frameOrigin] = frameInfo.origin?.split('://') || [];
+   const defaults = {
+     protocol: 'http',
+     site: 'wiki.dbbs.co',
+     query: 'Apparatus'
+   };
+   if (!!frameOrigin) {
+     defaults.protocol = frameProtocol;
+     defaults.site = frameOrigin;
+     defaults.query = '';
+   }
+   display({defaults, frameInfo});
+  </script>
   <script type="text/markdown">
     # Explore Renaming
    ---
@@ -8,8 +23,8 @@
   </script>
   <script type="module">
    const form = view(Inputs.form({
-     protocol: Inputs.radio(['http', 'https'], {value: 'http'}),
-     site: Inputs.text({value: 'wiki.dbbs.co', submit: true, width: 80})
+     protocol: Inputs.radio(['http', 'https'], {value: defaults.protocol}),
+     site: Inputs.text({value: defaults.site, submit: true, width: 80})
    }, {
      template: ({protocol, site}) => html`
        <div style="display: flex; flex-direction: cols;">
@@ -32,9 +47,7 @@
    2. choose which page to rename
   </script>
   <script type="module">
-   const results = view(Inputs.search(await sitemap, {
-     query: 'Apparatus'
-   }));
+   const results = view(Inputs.search(await sitemap, {query: defaults.query}));
   </script>
   <script type="module">
     const selection = view(Inputs.table(results, {
