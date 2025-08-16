@@ -54,7 +54,7 @@
      .then(res => res.json())
      .catch(error => {error});
    const fedwikisearchUrl = new URL('http://query.search.federatedwiki.org/search');
-   fedwikisearchUrl.searchParams.set('find', 'slugs');
+   fedwikisearchUrl.searchParams.set('find', 'links');
    fedwikisearchUrl.searchParams.set('within', 'pages');
    fedwikisearchUrl.searchParams.set('match', 'and');
    fedwikisearchUrl.searchParams.set('query', slug);
