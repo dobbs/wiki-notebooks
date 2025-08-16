@@ -3,23 +3,37 @@
   <title>Explore Renaming</title>
   <script type="text/markdown">
     # Explore Renaming
+   ---
+    1. specify the wiki site
   </script>
   <script type="module">
    const form = view(Inputs.form({
-     site: Inputs.text({label: 'Site', value: 'wiki.dbbs.co'}),
-     protocol: Inputs.radio(['http', 'https'], {label: 'Protocol', value: 'http'}),
+     protocol: Inputs.radio(['http', 'https'], {value: 'http'}),
+     site: Inputs.text({value: 'wiki.dbbs.co', submit: true, width: 80})
+   }, {
+     template: ({protocol, site}) => html`
+       <div style="display: flex; flex-direction: cols;">
+         ${protocol}
+         ${site}
+       </div>`
    }));
   </script>
   <script type="module">
-   const sitemapUrl = new URL(`http://${form.site}/system/sitemap.json`);
+   const sitemapUrl = new URL(`${form.protocol}://${form.site}/system/sitemap.json`);
   </script>
   <script type="module">
    const sitemap = fetch(sitemapUrl)
      .then(res => res.json())
      .then(json => json.map(r => (r.date = new Date(r.date), r)))
      .catch(error => [{error}]);
+  </script>
+  <script type="text/markdown">
+   ---
+   2. choose which page to rename
+  </script>
+  <script type="module">
    const results = view(Inputs.search(await sitemap, {
-     query: 'Welcome'
+     query: 'Apparatus'
    }));
   </script>
   <script type="module">
@@ -30,8 +44,7 @@
       header: {title: 'pages in sitemap'},
       sort: 'date',
       reverse: true,
-      multiple: false,
-      rows: 5.5
+      multiple: false
     }));
   </script>
   <script type="module">
@@ -40,6 +53,24 @@
    const page = fetch(pageUrl)
      .then(res => res.json())
      .catch(error => {error});
+   const fedwikisearchUrl = new URL('http://query.search.federatedwiki.org/search');
+   fedwikisearchUrl.searchParams.set('find', 'slugs');
+   fedwikisearchUrl.searchParams.set('within', 'pages');
+   fedwikisearchUrl.searchParams.set('match', 'and');
+   fedwikisearchUrl.searchParams.set('query', slug);
+   const federationHtml = fetch(fedwikisearchUrl)
+     .then(res => res.json())
+     .then(json => {
+       const markup = json.results;
+       const div = html`<div>`;
+       div.innerHTML = markup;
+       return div;
+     })
+     .catch(error => html`${error}`);
+  </script>
+  <script type="text/markdown">
+   ---
+   3. update other pages that link here
   </script>
   <script type="module">
    await selection;
@@ -58,6 +89,13 @@
      reverse: true,
      rows: 5.5
    }));
+  </script>
+  <script type="text/markdown">
+   ---
+   4. consider pages from other sites
+  </script>
+  <script type="module">
+   display(federationHtml);
   </script>
   <script type="module" pinned>
    const debug = {selection, page, backlinks};
