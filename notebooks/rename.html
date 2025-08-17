@@ -71,19 +71,20 @@
    fedwikisearchUrl.searchParams.set('within', 'pages');
    fedwikisearchUrl.searchParams.set('match', 'and');
    fedwikisearchUrl.searchParams.set('query', slug);
-   const federationHtml = fetch(fedwikisearchUrl)
+   const linksDiv = html`<div><em>...searching...</em>`;
+   fetch(fedwikisearchUrl)
      .then(res => res.json())
      .then(json => {
        const markup = json.results;
-       const div = html`<div>`;
-       div.innerHTML = markup;
-       return div;
+       linksDiv.innerHTML = markup
+         ? markup
+         : `<em>No links found in the wider federation.</em>`;
      })
-     .catch(error => html`${error}`);
+     .catch(error => linksDiv.append(html`${error}`));
   </script>
   <script type="text/markdown">
    ---
-   3. update other pages that link here
+   3. Any local links to ${selection.title}?
   </script>
   <script type="module">
    await selection;
@@ -105,10 +106,10 @@
   </script>
   <script type="text/markdown">
    ---
-   4. consider pages from other sites
+   4. Any federation links to ${selection.title}?
   </script>
   <script type="module">
-   display(federationHtml);
+   display(linksDiv);
   </script>
   <script type="module" pinned>
    const debug = {selection, page, backlinks};
