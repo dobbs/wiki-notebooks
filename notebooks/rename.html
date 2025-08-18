@@ -1,7 +1,8 @@
 <!doctype html>
 <notebook>
-  <title>Explore Renaming</title>
+  <title>Rename with Care</title>
   <script type="module">
+   import * as frame from './frame.js';
    const frameInfo = Object.fromEntries(new URLSearchParams(window.location.hash.slice(1)).entries());
    const [frameProtocol, frameOrigin] = frameInfo.origin?.split('://') || [];
    const defaults = {
@@ -9,32 +10,39 @@
      site: 'wiki.dbbs.co',
      query: 'Apparatus'
    };
+   let formatTitle = title => title;
    if (!!frameOrigin) {
      defaults.protocol = frameProtocol;
      defaults.site = frameOrigin;
      defaults.query = '';
+     function click(title) {
+       return event => {
+         event.preventDefault();
+         frame.link(title, event.shiftKey);
+       };
+     }
+     formatTitle = title => html`<a href="#" data-title="${title}" onclick=${click(title)}>${title}</a>`;
    }
-   display({defaults, frameInfo});
   </script>
   <script type="text/markdown">
-    # Explore Renaming
+    # Rename with Care
    ---
     1. specify the wiki site
   </script>
   <script type="module">
-   const form = view(Inputs.form({
+   const site = view(Inputs.form({
      protocol: Inputs.radio(['http', 'https'], {value: defaults.protocol}),
-     site: Inputs.text({value: defaults.site, submit: true, width: 80})
+     domain: Inputs.text({value: defaults.site, submit: true, width: 80})
    }, {
-     template: ({protocol, site}) => html`
+     template: ({protocol, domain}) => html`
        <div style="display: flex; flex-direction: cols;">
          ${protocol}
-         ${site}
+         ${domain}
        </div>`
    }));
   </script>
   <script type="module">
-   const sitemapUrl = new URL(`${form.protocol}://${form.site}/system/sitemap.json`);
+   const sitemapUrl = new URL(`${site.protocol}://${site.domain}/system/sitemap.json`);
   </script>
   <script type="module">
    const sitemap = fetch(sitemapUrl)
@@ -50,15 +58,16 @@
    const results = view(Inputs.search(await sitemap, {query: defaults.query}));
   </script>
   <script type="module">
-    const selection = view(Inputs.table(results, {
-      columns: ['title', 'date'],
-      value: results.reduce((max, item) => (item.date > max.date) ? item : max,
-                            {date: new Date(0)}),
-      header: {title: 'pages in sitemap'},
-      sort: 'date',
-      reverse: true,
-      multiple: false
-    }));
+   const selection = view(Inputs.table(results, {
+     columns: ['title', 'date'],
+     format: {title: formatTitle},
+     value: results.reduce((max, item) => (item.date > max.date) ? item : max,
+                           {date: new Date(0)}),
+     header: {title: 'pages in sitemap'},
+     sort: 'date',
+     reverse: true,
+     multiple: false
+   }));
   </script>
   <script type="module">
    const slug = (await selection)?.slug;
@@ -77,8 +86,8 @@
      .then(json => {
        const markup = json.results;
        linksDiv.innerHTML = markup
-         ? markup
-         : `<em>No links found in the wider federation.</em>`;
+                          ? markup
+                          : `<em>No links found in the wider federation.</em>`;
      })
      .catch(error => linksDiv.append(html`${error}`));
   </script>
@@ -99,6 +108,7 @@
    view(Inputs.table(backlinks, {
      columns: ['title', 'date'],
      header: {title: 'backlinks'},
+     format: {title: formatTitle},
      sort: 'date',
      reverse: true,
      rows: 5.5
@@ -111,9 +121,32 @@
   <script type="module">
    display(linksDiv);
   </script>
-  <script type="module" pinned>
-   const debug = {selection, page, backlinks};
-   display(debug);
+  <script type="text/markdown">
+   ---
+   5. What title do you prefer?
+  </script>
+  <script type="module">
+   const datalist = (await sitemap).map(p=>p.title);
+   const title = view(Inputs.text({datalist}));
+  </script>
+  <script type="module">
+   function preview(event) {
+     event.preventDefault();
+     const button = event.currentTarget;
+     if (datalist.includes(title)) {
+       button.value = 'A page with that name already exists.';
+     } else {
+       button.value = '';
+       frame.open({...page, title}, event.shiftKey);
+     }
+     button.dispatchEvent(new Event('update'), {bubbles: true});
+   };
+   const previewButton = html`<button onclick=${preview}>Preview</button>`;
+   const errorMessage = Generators.input(previewButton);
+   view(previewButton);
+  </script>
+  <script type="module">
+   display(html`<div style="color:red;">${errorMessage}`);
   </script>
 
 </notebook>

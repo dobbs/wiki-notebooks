@@ -4,6 +4,6 @@
   },
   "scripts": {
     "docs:preview": "notebooks preview --root notebooks",
-    "docs:build": "notebooks build --empty --root notebooks --out ../docs -- notebooks/*.html"
+    "docs:build": "notebooks build --empty --root notebooks --out ../docs -- notebooks/*.html notebooks/*.js"
   }
 }
