@@ -1,0 +1,34 @@
+<!doctype html>
+<notebook theme="air">
+  <title>Cube</title>
+  <script id="1" type="text/markdown">
+    # Cube
+  </script>
+  <script id="2" type="text/html">
+    <svg viewBox="-200 -200 400 400" height="500px">
+      <g data-axis="x" transform="rotate(0) translate(0 ${co})" stroke="black" stroke-width="1" fill="none">
+        <circle r="${r + ro}" />
+        <circle r="${r}" />
+        <circle r="${r - ro}" />
+      </g>
+      <g data-axis="x" transform="rotate(120) translate(0 ${co})" stroke="black" stroke-width="1" fill="none">
+        <circle r="${r + ro}" />
+        <circle r="${r}" />
+        <circle r="${r - ro}" />
+      </g>
+      <g data-axis="x" transform="rotate(-120) translate(0 ${co})" stroke="black" stroke-width="1" fill="none">
+        <circle r="${r + ro}" />
+        <circle r="${r}" />
+        <circle r="${r - ro}" />
+      </g>
+    </svg>
+  </script>
+  <script id="3" type="text/js">
+   const r = view(Inputs.range([50, 100]));
+   const ro = view(Inputs.range([5, 20]));
+   const nco = view(Inputs.range([10, 90]));
+  </script>
+  <script id="4" type="text/js">
+   const co = -1 * nco * Math.sqrt(3);
+  </script>
+</notebook>
