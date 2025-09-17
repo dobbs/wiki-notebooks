@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@observablehq/notebook-kit": "^1.0.1"
+    "@observablehq/notebook-kit": "^1.4.1"
   },
   "scripts": {
     "docs:preview": "notebooks preview --root notebooks",
