@@ -5,7 +5,7 @@
     # Cube
   </script>
   <script id="2" type="text/html">
-    <svg viewBox="-200 -200 400 400" height="500px">
+    <svg viewBox="-200 -200 400 400" height="500px" transform="rotate(-90)">
       <g data-axis="x" transform="rotate(0) translate(${co})" stroke="black" stroke-width="1" fill="none">
         <circle data-rail="outside" r="${r + ro}" />
         <circle data-rail="center"  r="${r}" />
@@ -25,73 +25,233 @@
         <line x1=${co} x2=${-5*co} stroke="lightgrey" />
       </g>
 
-      <circle data-rail="inside" data-stop="inside" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+OI}) translate(${r+ro})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+OC}) translate(${r+ro})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+OO}) translate(${r+ro})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+CI}) translate(${r})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+CC}) translate(${r})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+CO}) translate(${r})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+II}) translate(${r-ro})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+IC}) translate(${r-ro})"
+      />
+
+      <circle fill="red" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${-30+180+IO}) translate(${r-ro})"
+      />
+
+
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+OI}) translate(${r+ro})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+OC}) translate(${r+ro})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+OO}) translate(${r+ro})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+CI}) translate(${r})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+CC}) translate(${r})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+CO}) translate(${r})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+II}) translate(${r-ro})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+IC}) translate(${r-ro})"
+      />
+
+      <circle fill="white" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${-30+180+IO}) translate(${r-ro})"
+      />
+
+
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+OI}) translate(${r+ro})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+OC}) translate(${r+ro})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+OO}) translate(${r+ro})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+CI}) translate(${r})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+CC}) translate(${r})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+CO}) translate(${r})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+II}) translate(${r-ro})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+IC}) translate(${r-ro})"
+      />
+
+      <circle fill="blue" stroke="black" r="5"
+              transform="rotate(0) translate(${co}) rotate(${-30+180+IO}) translate(${r-ro})"
+      />
+
+
+
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+II}) translate(${r-ro})"
       />
 
-      <circle data-rail="inside" data-stop="center" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+IC}) translate(${r-ro})"
       />
 
-      <circle data-rail="inside" data-stop="outside" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+IO}) translate(${r-ro})"
       />
 
-      <circle data-rail="center" data-stop="inside" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+CI}) translate(${r})"
       />
 
-      <circle data-rail="center" data-stop="center" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+CC}) translate(${r})"
       />
 
-      <circle data-rail="center" data-stop="outside" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+CO}) translate(${r})"
       />
 
-      <circle data-rail="outside" data-stop="inside" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+OI}) translate(${r+ro})"
       />
 
-      <circle data-rail="outside" data-stop="center" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+OC}) translate(${r+ro})"
       />
 
-      <circle data-rail="outside" data-stop="outside" data-kind="face"
-              fill="red" stroke="black" r="5"
+      <circle fill="yellow" stroke="black" r="5"
               transform="rotate(0) translate(${co}) rotate(${30+180+OO}) translate(${r+ro})"
       />
 
 
 
-      <circle data-rail="center" data-kind="face"
-              fill="green" stroke="black" r="5"
-              transform="rotate(-120) translate(${co}) rotate(${IC}) translate(${r+0})"
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+II}) translate(${r-ro})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+IC}) translate(${r-ro})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+IO}) translate(${r-ro})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+CI}) translate(${r})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+CC}) translate(${r})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+CO}) translate(${r})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+OI}) translate(${r+ro})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+OC}) translate(${r+ro})"
+      />
+
+      <circle fill="green" stroke="black" r="5"
+              transform="rotate(120) translate(${co}) rotate(${30+180+OO}) translate(${r+ro})"
       />
 
 
-      <circle data-rail="outside" data-stop="inside" data-kind="face"
-              fill="blue" stroke="black" r="5"
-              transform="rotate(120) translate(${co}) rotate(${-30+180+OI}) translate(${r+ro})"
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+II}) translate(${r-ro})"
       />
 
-      <circle data-rail="outside" data-stop="center" data-kind="face"
-              fill="blue" stroke="black" r="5"
-              transform="rotate(120) translate(${co}) rotate(${-30+180+OC}) translate(${r+ro})"
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+IC}) translate(${r-ro})"
       />
 
-      <circle data-rail="outside" data-stop="outside" data-kind="face"
-              fill="blue" stroke="black" r="5"
-              transform="rotate(120) translate(${co}) rotate(${-30+180+OO}) translate(${r+ro})"
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+IO}) translate(${r-ro})"
       />
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+CI}) translate(${r})"
+      />
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+CC}) translate(${r})"
+      />
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+CO}) translate(${r})"
+      />
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+OI}) translate(${r+ro})"
+      />
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+OC}) translate(${r+ro})"
+      />
+
+      <circle fill="orange" stroke="black" r="5"
+              transform="rotate(-120) translate(${co}) rotate(${30+180+OO}) translate(${r+ro})"
+      />
+
+
 
     </svg>
   </script>
@@ -101,15 +261,15 @@
    call these rails. Tiny colored circles represent faces of cubies. There will
    be 54 of them that can be moved along the rails.
   </script>
-  <script id="3" type="text/javascript">
+  <script id="4" type="text/javascript">
    const r = view(Inputs.range([50, 100], {label: "r", value: 90, step: 1}));
    const ro = view(Inputs.range([5, 20], {label: "ro", value: 20, step: 1}));
    const co = view(Inputs.range([10, 90], {label: "co", value: 60, step: 1}));
   </script>
-  <script id="4" type="text/javascript">
+  <script id="5" type="text/javascript">
    const cd = co*Math.sqrt(3);
   </script>
-  <script id="5" type="text/javascript">
+  <script id="6" type="text/javascript">
    const rad2deg = 180/Math.PI;
    const C = ({left:L, right:R, opposite:O}) => rad2deg*Math.acos((L*L+R*R-O*O)/(2*L*R)); // law of cosines
    const CI = C({left: r, right: cd, opposite: r-ro});
@@ -122,7 +282,7 @@
    const II = C({left: r-ro, right: cd, opposite: r-ro});
    const OO = C({left: r+ro, right: cd, opposite: r+ro});
   </script>
-  <script id="6" type="text/javascript">
+  <script id="7" type="text/javascript">
    view({CI,IC,CO,OC,CC,II,OO});
   </script>
 </notebook>
