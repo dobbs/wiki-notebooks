@@ -10,19 +10,16 @@
         <circle data-rail="outside" r="${r + ro}" />
         <circle data-rail="center"  r="${r}" />
         <circle data-rail="inside"  r="${r - ro}" />
-        <line x1=${co} x2=${-5*co} stroke="lightgrey" />
       </g>
       <g data-axis="y" transform="rotate(120) translate(${co})" stroke="black" stroke-width="1" fill="none">
         <circle data-rail="outside" r="${r + ro}" />
         <circle data-rail="center"  r="${r}" />
         <circle data-rail="inside"  r="${r - ro}" />
-        <line x1=${co} x2=${-5*co} stroke="lightgrey" />
       </g>
       <g data-axis="z" transform="rotate(-120) translate(${co})" stroke="black" stroke-width="1" fill="none">
         <circle data-rail="outside" r="${r + ro}" />
         <circle data-rail="center"  r="${r}" />
         <circle data-rail="inside"  r="${r - ro}" />
-        <line x1=${co} x2=${-5*co} stroke="lightgrey" />
       </g>
 
       <circle fill="red" stroke="black" r="5"
@@ -262,8 +259,8 @@
    be 54 of them that can be moved along the rails.
   </script>
   <script id="4" type="text/javascript">
-   const r = view(Inputs.range([50, 100], {label: "r", value: 90, step: 1}));
-   const ro = view(Inputs.range([5, 20], {label: "ro", value: 20, step: 1}));
+   const r = view(Inputs.range([50, 100], {label: "r", value: 100, step: 1}));
+   const ro = view(Inputs.range([5, 20], {label: "ro", value: 15, step: 1}));
    const co = view(Inputs.range([10, 90], {label: "co", value: 60, step: 1}));
   </script>
   <script id="5" type="text/javascript">
