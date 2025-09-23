@@ -257,6 +257,11 @@
    one circle for each layer on that axis, for a total of nine circles. I
    call these rails. Tiny colored circles represent faces of cubies. There will
    be 54 of them that can be moved along the rails.
+
+   [Cube Mechanics](https://en.wikipedia.org/wiki/Rubik%27s_Cube#Mechanics)
+   [Cube Solution](https://en.wikibooks.org/wiki/How_to_Solve_the_Rubik%27s_Cube#Solving_Programs)
+   [Cube Solver](https://rubikscu.be/solver/)
+   [Cube Explorer by Herbert Kociemba](https://kociemba.org/index.html#rubik)
   </script>
   <script id="4" type="text/javascript">
    const r = view(Inputs.range([50, 100], {label: "r", value: 100, step: 1}));
@@ -278,6 +283,11 @@
    const CC = C({left: r, right: cd, opposite: r});
    const II = C({left: r-ro, right: cd, opposite: r-ro});
    const OO = C({left: r+ro, right: cd, opposite: r+ro});
+   Object.assign(window, {foo: {
+     CI, CC, CO,
+     II, IC, IO,
+     OI, OC, OO
+   }});
   </script>
   <script id="7" type="text/javascript">
    view({CI,IC,CO,OC,CC,II,OO});
