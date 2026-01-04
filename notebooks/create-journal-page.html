@@ -1,0 +1,49 @@
+<!doctype html>
+<notebook theme="air">
+  <title>Create Journal Page</title>
+  <script id="1" type="text/javascript">
+   import * as frame from './frame.js';
+   const today = (new Date()).toLocaleString('en-CA', {
+     year: 'numeric',
+     month: 'numeric',
+     day: 'numeric'
+   });
+   let origin;
+   async function openOrCreateJournalPage(event) {
+     try {
+       const url = new URL(`//${origin}/${today}.json`);
+       fetch(url, {method: 'HEAD'});
+       frame.link(today, event.shiftKey);
+     } catch (error) {
+       const page = {
+         title: today,
+         story: [
+           {
+             type: 'paragraph',
+             text: 'Where do we begin today?'
+           },
+           {
+             type: "reference",
+             id: "4e8e342b350efb22",
+             text: "This page is a [[Journal]].",
+             site: "meta.wiki.do",
+             slug: "meta",
+             title: "Meta"
+           },
+           {
+             type: 'paragraph',
+             text: '...'
+           }
+         ]
+       }
+       frame.open(page, event.shiftKey);
+       console.log({today, event, origin, error, page});
+     }
+   }
+
+   ({origin} = await frame.context());
+  </script>
+  <script id="2" type="text/javascript">
+   html`<button onclick=${openOrCreateJournalPage}>Open or Create: ${today}</button>`
+  </script>
+</notebook>
