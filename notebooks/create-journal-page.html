@@ -11,7 +11,7 @@
    let origin;
    async function openOrCreateJournalPage(event) {
      try {
-       const url = new URL(`//${origin}/${today}.json`);
+       const url = new URL(`${origin}/${today}.json`);
        fetch(url, {method: 'HEAD'});
        frame.link(today, event.shiftKey);
      } catch (error) {
