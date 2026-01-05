@@ -12,7 +12,10 @@
    async function openOrCreateJournalPage(event) {
      try {
        const url = new URL(`${origin}/${today}.json`);
-       fetch(url, {method: 'HEAD'});
+       const res = await fetch(url, {method: 'HEAD'});
+       if (! res.ok) {
+         throw new Error(`${res.statusText}: ${url}`);
+       }
        frame.link(today, event.shiftKey);
      } catch (error) {
        const page = {
